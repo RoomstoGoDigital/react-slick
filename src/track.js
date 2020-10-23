@@ -187,6 +187,7 @@ var renderSlides = function(spec) {
     slides.push(
       React.cloneElement(child, {
         key: "original" + getKey(child, index),
+        "data-testid": spec.testid,
         "data-index": index,
         "aria-checked": tabOrder.truthy,
         "aria-required": sliderAttr.required,

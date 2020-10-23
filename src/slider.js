@@ -25,7 +25,7 @@ export default class Slider extends React.Component {
   }
 
   // handles responsive breakpoints
-  componentWillMount = () => {
+  componentWillMount() {
     // performance monitoring
     //if (process.env.NODE_ENV !== 'production') {
     //const { whyDidYouUpdate } = require('why-did-you-update')
@@ -65,7 +65,7 @@ export default class Slider extends React.Component {
           this.setState({ breakpoint: null });
         });
     }
-  };
+  }
 
   componentWillUnmount() {
     this._responsiveMediaHandlers.forEach(function(obj) {
