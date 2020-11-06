@@ -9,6 +9,7 @@ export default class RadioAccesibility extends Component {
       speed: 555,
       slidesToShow: 3,
       slidesToScroll: 3,
+      testid: "date-in-picker",
       cssHideClass: "hide508",
       type: "radiogroup",
       label: "Delivery Calendar",

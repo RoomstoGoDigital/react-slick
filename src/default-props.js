@@ -49,6 +49,7 @@ var defaultProps = {
   swipe: true,
   swipeEvent: null,
   swipeToSlide: false,
+  testid: null,
   touchMove: true,
   type: "list",
   touchThreshold: 5,
