@@ -22,6 +22,7 @@ export class PrevArrow extends React.PureComponent {
     ) {
       prevClasses["slick-disabled"] = true;
       prevHandler = null;
+      return null;
     }
 
     let prevArrowProps = {
@@ -69,6 +70,7 @@ export class NextArrow extends React.PureComponent {
     if (!canGoNext(this.props)) {
       nextClasses["slick-disabled"] = true;
       nextHandler = null;
+      return null;
     }
 
     let nextArrowProps = {
@@ -82,7 +84,15 @@ export class NextArrow extends React.PureComponent {
       currentSlide: this.props.currentSlide,
       slideCount: this.props.slideCount
     };
+    // const {
+    //   currentSlide,
+    //   slideCount,
+    //   slidesToShow,
+    // } = this.props
+
     let nextArrow;
+
+    // if (currentSlide >= slideCount - slidesToShow) return null
 
     if (this.props.nextArrow) {
       nextArrow = React.cloneElement(this.props.nextArrow, {
