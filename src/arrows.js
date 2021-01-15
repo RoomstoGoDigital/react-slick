@@ -4,6 +4,11 @@ import React from "react";
 import classnames from "classnames";
 import { canGoNext } from "./utils/innerSliderUtils";
 
+/**
+ * PrevArrow
+ * @param {boolean} arrowVisibleFlag Arrows are hidden when not possible to scroll further or previous
+ * @returns {JSX.Element} Returns null if arrowVisibleFlag is false
+ */
 export class PrevArrow extends React.PureComponent {
   clickHandler(options, e) {
     if (e) {
@@ -22,7 +27,7 @@ export class PrevArrow extends React.PureComponent {
     ) {
       prevClasses["slick-disabled"] = true;
       prevHandler = null;
-      return null;
+      if (!this.props.arrowVisibleFlag) return null;
     }
 
     let prevArrowProps = {
@@ -56,6 +61,12 @@ export class PrevArrow extends React.PureComponent {
   }
 }
 
+/**
+ * NextArrow
+ *
+ * @param {boolean} arrowVisibleFlag
+ * @returns {JSX.Element} returns null if arrowVisibleFlag false
+ */
 export class NextArrow extends React.PureComponent {
   clickHandler(options, e) {
     if (e) {
@@ -70,7 +81,7 @@ export class NextArrow extends React.PureComponent {
     if (!canGoNext(this.props)) {
       nextClasses["slick-disabled"] = true;
       nextHandler = null;
-      return null;
+      if (!this.props.arrowVisibleFlag) return null;
     }
 
     let nextArrowProps = {
@@ -84,15 +95,8 @@ export class NextArrow extends React.PureComponent {
       currentSlide: this.props.currentSlide,
       slideCount: this.props.slideCount
     };
-    // const {
-    //   currentSlide,
-    //   slideCount,
-    //   slidesToShow,
-    // } = this.props
 
     let nextArrow;
-
-    // if (currentSlide >= slideCount - slidesToShow) return null
 
     if (this.props.nextArrow) {
       nextArrow = React.cloneElement(this.props.nextArrow, {
