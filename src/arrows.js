@@ -6,6 +6,8 @@ import { canGoNext } from "./utils/innerSliderUtils";
 
 /**
  * PrevArrow
+ * Note that props originate in 'initial-state.js'
+ *
  * @param {boolean} arrowVisibleFlag Arrows are hidden when not possible to scroll further or previous
  * @returns {JSX.Element} Returns null if arrowVisibleFlag is false
  */
