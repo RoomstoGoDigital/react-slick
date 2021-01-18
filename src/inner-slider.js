@@ -663,7 +663,7 @@ export class InnerSlider extends React.Component {
       "slidesToShow",
       "prevArrow",
       "nextArrow",
-      "arrowVisibleFlag"
+      "autoHideArrow"
     ]);
     arrowProps.clickHandler = this.changeSlide;
 
