@@ -4,6 +4,14 @@ import React from "react";
 import classnames from "classnames";
 import { canGoNext } from "./utils/innerSliderUtils";
 
+/**
+ * PrevArrow
+ *
+ * Note that props originate in 'initial-state.js'
+ *
+ * @param {boolean} autoHideArrow Arrows are hidden when not possible to scroll previous
+ * @returns {JSX.Element}
+ */
 export class PrevArrow extends React.PureComponent {
   clickHandler(options, e) {
     if (e) {
@@ -22,6 +30,7 @@ export class PrevArrow extends React.PureComponent {
     ) {
       prevClasses["slick-disabled"] = true;
       prevHandler = null;
+      if (this.props.autoHideArrow) return null;
     }
 
     let prevArrowProps = {
@@ -55,6 +64,12 @@ export class PrevArrow extends React.PureComponent {
   }
 }
 
+/**
+ * NextArrow
+ *
+ * @param {boolean} autoHideArrow - hides arrow if you cannot click Next
+ * @returns {JSX.Element}
+ */
 export class NextArrow extends React.PureComponent {
   clickHandler(options, e) {
     if (e) {
@@ -69,6 +84,7 @@ export class NextArrow extends React.PureComponent {
     if (!canGoNext(this.props)) {
       nextClasses["slick-disabled"] = true;
       nextHandler = null;
+      if (this.props.autoHideArrow) return null;
     }
 
     let nextArrowProps = {
@@ -82,6 +98,7 @@ export class NextArrow extends React.PureComponent {
       currentSlide: this.props.currentSlide,
       slideCount: this.props.slideCount
     };
+
     let nextArrow;
 
     if (this.props.nextArrow) {

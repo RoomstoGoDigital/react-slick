@@ -20,7 +20,8 @@ const initialState = {
   swiping: false,
   touchObject: { startX: 0, startY: 0, curX: 0, curY: 0 },
   trackStyle: {},
-  trackWidth: 0
+  trackWidth: 0,
+  autoHideArrow: true
 };
 
 export default initialState;
