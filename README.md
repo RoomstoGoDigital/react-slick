@@ -24,8 +24,10 @@ yarn add react-slick
 
 ```bash
 npm install slick-carousel
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
+
+// Import css files
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 ```
 
 or add cdn link in your html
@@ -105,6 +107,10 @@ open http://localhost:8080
 <a href="https://opencollective.com/react-slick/donate" target="_blank">
   <img src="https://opencollective.com/react-slick/donate/button@2x.png?color=blue" width=300 />
 </a>
+
+## Contributing
+
+Please see the [contributing guidelines](./CONTRIBUTING.md)
 
 ## Contributors
 

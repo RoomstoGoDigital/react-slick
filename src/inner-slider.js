@@ -52,7 +52,7 @@ export class InnerSlider extends React.Component {
       this.list.style.height = getHeight(elem) + "px";
     }
   };
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     this.ssrInit();
     this.props.onInit && this.props.onInit();
     if (this.props.lazyLoad) {
@@ -97,10 +97,6 @@ export class InnerSlider extends React.Component {
         slide.onblur = this.props.pauseOnFocus ? this.onSlideBlur : null;
       }
     );
-    // To support server-side rendering
-    if (!window) {
-      return;
-    }
     if (window.addEventListener) {
       window.addEventListener("resize", this.onWindowResized);
     } else {
@@ -126,8 +122,9 @@ export class InnerSlider extends React.Component {
     if (this.autoplayTimer) {
       clearInterval(this.autoplayTimer);
     }
+    this.ro.disconnect();
   };
-  componentWillReceiveProps = nextProps => {
+  UNSAFE_componentWillReceiveProps = nextProps => {
     let spec = {
       listRef: this.list,
       trackRef: this.track,
@@ -264,9 +261,7 @@ export class InnerSlider extends React.Component {
       };
       if (this.props.centerMode) {
         let currentWidth = `${childrenWidths[this.state.currentSlide]}px`;
-        trackStyle.left = `calc(${
-          trackStyle.left
-        } + (100% - ${currentWidth}) / 2 ) `;
+        trackStyle.left = `calc(${trackStyle.left} + (100% - ${currentWidth}) / 2 ) `;
       }
       this.setState({
         trackStyle
@@ -276,15 +271,15 @@ export class InnerSlider extends React.Component {
     let childrenCount = React.Children.count(this.props.children);
     const spec = { ...this.props, ...this.state, slideCount: childrenCount };
     let slideCount = getPreClones(spec) + getPostClones(spec) + childrenCount;
-    let trackWidth = 100 / this.props.slidesToShow * slideCount;
+    let trackWidth = (100 / this.props.slidesToShow) * slideCount;
     let slideWidth = 100 / slideCount;
     let trackLeft =
-      -slideWidth *
-      (getPreClones(spec) + this.state.currentSlide) *
-      trackWidth /
+      (-slideWidth *
+        (getPreClones(spec) + this.state.currentSlide) *
+        trackWidth) /
       100;
     if (this.props.centerMode) {
-      trackLeft += (100 - slideWidth * trackWidth / 100) / 2;
+      trackLeft += (100 - (slideWidth * trackWidth) / 100) / 2;
     }
     let trackStyle = {
       width: trackWidth + "%",
@@ -296,7 +291,7 @@ export class InnerSlider extends React.Component {
     });
   };
   checkImagesLoad = () => {
-    let images = document.querySelectorAll(".slick-slide img");
+    let images = this.list.querySelectorAll(".slick-slide img");
     let imagesCount = images.length,
       loadedCount = 0;
     Array.prototype.forEach.call(images, image => {
@@ -390,9 +385,7 @@ export class InnerSlider extends React.Component {
     );
     onLazyLoad && slidesToLoad.length > 0 && onLazyLoad(slidesToLoad);
     this.setState(state, () => {
-      asNavFor &&
-        asNavFor.innerSlider.state.currentSlide !== currentSlide &&
-        asNavFor.innerSlider.slideHandler(index);
+      asNavFor && asNavFor.innerSlider.slideHandler(index);
       if (!nextState) return;
       this.animationEndCallback = setTimeout(() => {
         const { animating, ...firstBatch } = nextState;
@@ -712,7 +705,8 @@ export class InnerSlider extends React.Component {
 
     let innerSliderProps = {
       className: className,
-      dir: "ltr"
+      dir: "ltr",
+      style: this.props.style
     };
 
     if (this.props.unslick) {
