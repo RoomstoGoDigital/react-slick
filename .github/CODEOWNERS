@@ -1,0 +1,5 @@
+Jenkinsfile     @RoomstoGoDigital/DevOps
+/scripts/       @RoomstoGoDigital/DevOps
+/.github/       @RoomstoGoDigital/DevOps
+/ci/            @RoomstoGoDigital/DevOps
+serverless.yml  @RoomstoGoDigital/DevOps
